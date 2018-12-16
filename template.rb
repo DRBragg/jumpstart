@@ -13,7 +13,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/excid3/jumpstart.git",
+      "https://github.com/drbragg/jumpstart.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
@@ -156,6 +156,10 @@ def add_guardfile
   copy_file "Guardfile"
 end
 
+def add_rubocop
+  copy_file "rubocop.yml"
+end
+
 def add_annotate
   run "annotate --exclude tests,fixtures,factories,serializers"
 end
@@ -255,6 +259,7 @@ after_bundle do
   add_bootstrap
   add_sidekiq
   add_foreman
+  add_rubocop
   add_guardfile
   add_webpack
   add_announcements
