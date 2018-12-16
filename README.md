@@ -1,6 +1,6 @@
 # Rails Jumpstart
 
-It's like Laravel Spark, for Rails. All your Rails apps should start off with a bunch of great defaults.
+My edits to Chris Olivers (excid3) awesome jumpstart template.  Still a WIP as I build more apps and compare with existing ones I'll be able to update this to give me a better template for the apps I build.
 
 **Note:** Requires Rails 5.2
 
