@@ -27,14 +27,17 @@ end
 
 def add_gems
   gem 'administrate', '~> 0.10.0'
+  gem 'annotate', '>= 2.7.0'
   gem 'bootstrap', '~> 4.1', '>= 4.1.1'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
   gem 'devise', '~> 4.4', '>= 4.4.3'
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
   gem 'devise_masquerade', '~> 0.6.2'
-  gem 'font-awesome-sass', '~> 5.5', '>= 5.5.0.1'  
+  gem 'font-awesome-sass', '~> 5.5', '>= 5.5.0.1'
   gem 'foreman', '~> 0.84.0'
   gem 'friendly_id', '~> 5.2', '>= 5.2.4'
+  gem 'guard', ">= 2.2.2", require: false
+  gem 'guard-livereload', require: false
   gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
   gem 'jquery-rails', '~> 4.3.1'
   gem 'local_time', '~> 2.0', '>= 2.0.1'
@@ -47,6 +50,15 @@ def add_gems
   gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
   gem 'webpacker', '~> 3.5', '>= 3.5.3'
   gem 'whenever', require: false
+  # Test Gems
+  gem 'factory_bot_rails'
+  gem 'launchy', require: false
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'shoulda'
+  gem 'valid_attribute'
+  gem 'rails-controller-testing'
+  gem 'simplecov', require: false
 end
 
 def set_application_name
@@ -55,6 +67,10 @@ def set_application_name
 
   # Announce the user where he can change the application name in the future.
   puts "You can change application name inside: ./config/application.rb"
+end
+
+def install_rspec
+  generate "rspec:install"
 end
 
 def add_users
@@ -134,6 +150,18 @@ end
 
 def add_foreman
   copy_file "Procfile"
+end
+
+def add_guardfile
+  copy_file "Guardfile"
+end
+
+def add_rubocop
+  copy_file "rubocop.yml"
+end
+
+def add_annotate
+  run "annotate --exclude tests,fixtures,factories,serializers"
 end
 
 def add_announcements
@@ -226,10 +254,13 @@ add_gems
 after_bundle do
   set_application_name
   stop_spring
+  install_rspec
   add_users
   add_bootstrap
   add_sidekiq
   add_foreman
+  add_rubocop
+  add_guardfile
   add_webpack
   add_announcements
   add_notifications
@@ -244,6 +275,7 @@ after_bundle do
 
   # Migrations must be done before this
   add_administrate
+  add_annotate
 
   add_app_helpers_to_administrate
 
