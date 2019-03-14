@@ -1,8 +1,6 @@
-# Rails Jumpstart
+# Jumpstart Rails Template
 
 My edits to Chris Olivers (excid3) awesome jumpstart template.  Still a WIP as I build more apps and compare with existing ones I'll be able to update this to give me a better template for the apps I build.
-
-**Note:** Requires Rails 5.2
 
 ## Getting Started
 
@@ -12,10 +10,13 @@ Jumpstart is a Rails template, so you pass it in as an option when creating a ne
 
 You'll need the following installed to run the template successfully:
 
-* Ruby 2.5+
+* Ruby 2.5 or higher
+* Redis - For ActionCable support
 * bundler - `gem install bundler`
 * rails - `gem install rails`
 * Yarn - `brew install yarn` or [Install Yarn](https://yarnpkg.com/en/docs/install)
+* Foreman (optional) - `gem install foreman` - helps run all your
+  processes in development
 
 #### Creating a new app
 
@@ -28,6 +29,12 @@ Or if you have downloaded this repo, you can reference template.rb locally:
 ```bash
 rails new myapp -d postgresql -m template.rb
 ```
+
+To run your app, use `foreman start`.
+
+This will run `Procfile.dev` via `foreman start -f Procfile.dev` as configured by the `.foreman` file and will launch the development processes `rails server`, `sidekiq`, and `webpack-dev-server` processes. You can also run them in separate terminals manually if you prefer.
+
+A separate `Procfile` is generated for deploying to production.
 
 #### Authenticate with social networks
 
