@@ -1,9 +1,13 @@
 class Announcement < ApplicationRecord
-  TYPES = %w{ new fix update }
+  TYPES = %w[new fix update].freeze
 
   after_initialize :set_defaults
 
-  validates :announcement_type, :description, :name, :published_at, presence: true
+  validates_presence_of :announcement_type,
+                        :description,
+                        :name,
+                        :published_at
+  
   validates :announcement_type, inclusion: { in: TYPES }
 
   def set_defaults
