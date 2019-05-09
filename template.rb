@@ -38,7 +38,7 @@ def rails_6?
 end
 
 def add_gems
-  gem 'administrate', github: 'excid3/administrate', branch: 'zeitwerk'
+  gem 'administrate', github: 'thoughtbot/administrate'
   gem 'annotate', '>= 2.7.0'
   gem 'bootstrap', '~> 4.3', '>= 4.3.1'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
@@ -205,9 +205,9 @@ end
 def add_administrate
   generate 'administrate:install'
 
-  gsub_file 'app/dashboards/announcement_dashboard.rb',
-            /announcement_type: Field::String/,
-            'announcement_type: Field::Select.with_options(collection: Announcement::TYPES)'
+  #gsub_file "app/dashboards/announcement_dashboard.rb",
+    #/announcement_type: Field::String/,
+    #"announcement_type: Field::Select.with_options(collection: Announcement::TYPES)"
 
   gsub_file 'app/dashboards/user_dashboard.rb',
             /email: Field::String/,
@@ -232,17 +232,18 @@ def add_administrate
 end
 
 def add_multiple_authentication
-  insert_into_file 'config/routes.rb',
-                   ', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }',
-                   after: '  devise_for :users'
+    insert_into_file "config/routes.rb",
+    ', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }',
+    after: "  devise_for :users"
 
-  generate 'model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text'
+    generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
 
-  template = ''"
-  env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
-  %w{ facebook twitter github }.each do |provider|
-    if options = env_creds[provider]
-      config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
+    template = """
+    env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
+    %i{ facebook twitter github }.each do |provider|
+      if options = env_creds[provider]
+        config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
+      end
     end
   end
   "''.strip
