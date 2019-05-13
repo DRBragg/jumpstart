@@ -38,7 +38,6 @@ def rails_6?
 end
 
 def add_gems
-  gem 'rails', '6.0.0.rc1'
   gem 'administrate', github: 'thoughtbot/administrate'
   gem 'annotate', '>= 2.7.0'
   gem 'bootstrap', '~> 4.3', '>= 4.3.1'
