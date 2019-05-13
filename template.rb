@@ -42,7 +42,7 @@ def add_gems
   gem 'annotate', '>= 2.7.0'
   gem 'bootstrap', '~> 4.3', '>= 4.3.1'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
-  gem 'devise', '~> 4.4', '>= 4.4.3'
+  gem 'devise', '~> 4.6', '>= 4.6.1'
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
   gem 'devise_masquerade', '~> 0.6.2'
   gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
@@ -246,7 +246,7 @@ def add_multiple_authentication
       end
     end
   end
-  "''.strip
+  """.strip
 
   insert_into_file 'config/initializers/devise.rb', '  ' + template + "\n\n",
                    before: '  # ==> Warden configuration'
