@@ -46,7 +46,6 @@ def add_gems
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
   gem 'devise_masquerade', '~> 0.6.2'
   gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
-  gem 'foreman', '~> 0.84.0'
   gem 'friendly_id', '~> 5.2', '>= 5.2.4'
   gem 'guard', '>= 2.2.2', require: false
   gem 'guard-livereload', require: false
