@@ -231,18 +231,17 @@ def add_administrate
 end
 
 def add_multiple_authentication
-    insert_into_file "config/routes.rb",
-    ', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }',
-    after: "  devise_for :users"
+  insert_into_file "config/routes.rb",
+  ', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }',
+  after: "  devise_for :users"
 
-    generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
+  generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
 
-    template = """
-    env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
-    %i{ facebook twitter github }.each do |provider|
-      if options = env_creds[provider]
-        config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
-      end
+  template = """
+  env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
+  %i{ facebook twitter github }.each do |provider|
+    if options = env_creds[provider]
+      config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
     end
   end
   """.strip
