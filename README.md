@@ -1,5 +1,3 @@
-👉 We've also built [Jumpstart Pro](https://jumpstartrails.com) which is a version of Jumpstart that includes payments with Stripe & Braintree, team accounts, TailwindCSS, and much more.
-
 # Jumpstart Rails Template
 
 My edits to Chris Olivers (excid3) awesome jumpstart template.  Still a WIP as I build more apps and compare with existing ones I'll be able to update this to give me a better template for the apps I build.
