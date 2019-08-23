@@ -283,9 +283,6 @@ after_bundle do
   stop_spring
   install_rspec
   add_users
-  add_bootstrap
-  add_sidekiq
-  add_foreman
   add_rubocop
   add_guardfile
   add_webpack
