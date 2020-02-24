@@ -46,7 +46,7 @@ def add_gems
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
   gem 'devise_masquerade', '~> 0.6.2'
   gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
-  gem 'friendly_id', '~> 5.2', '>= 5.2.4'
+  gem 'friendly_id', '~> 5.2', '>= 5.2.5'
   gem 'guard', '>= 2.2.2', require: false
   gem 'guard-livereload', require: false
   gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
@@ -68,6 +68,10 @@ def add_gems
   gem 'valid_attribute'
   gem 'rails-controller-testing'
   gem 'simplecov', require: false
+  # Rubocop
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 def set_application_name

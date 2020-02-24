@@ -1,7 +1,11 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
-  TargetRubyVersion: <%= RUBY_VERSION[/\d+\.\d+/] %>
+  TargetRubyVersion: 2.6
   Exclude:
     - "bin/*"
     - Capfile
@@ -34,6 +38,7 @@ Metrics/ClassLength:
     - "test/**/*"
 
 Metrics/LineLength:
+  Max: 95
   Exclude:
     - "config/**/*"
     - "db/**/*"
@@ -73,9 +78,6 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Documentation:
-  Enabled: false
-
-Style/DoubleNegation:
   Enabled: false
 
 Style/EmptyMethod:
