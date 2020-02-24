@@ -44,7 +44,7 @@ def add_gems
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
   gem 'devise', '~> 4.7', '>= 4.7.0'
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
-  gem 'devise_masquerade', '~> 0.6.2'
+  gem 'devise_masquerade', '~> 1.2'
   gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
   gem 'friendly_id', '~> 5.2', '>= 5.2.4'
   gem 'guard', '>= 2.2.2', require: false
@@ -56,7 +56,7 @@ def add_gems
   gem 'omniauth-github', '~> 1.3'
   gem 'omniauth-twitter', '~> 1.4'
   gem 'pg'
-  gem 'sidekiq', '~> 5.2', '>= 5.2.5'
+  gem 'sidekiq', '~> 6.0', '>= 6.0.3'
   gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
   gem 'whenever', require: false
   # Test Gems
@@ -203,6 +203,10 @@ end
 
 def add_administrate
   generate 'administrate:install'
+
+  append_to_file "app/assets/config/manifest.js" do
+    "//= link administrate/application.css\n//= link administrate/application.js"
+  end
 
   gsub_file "app/dashboards/announcement_dashboard.rb",
     /announcement_type: Field::String/,
