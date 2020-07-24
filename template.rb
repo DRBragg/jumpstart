@@ -40,24 +40,23 @@ end
 def add_gems
   gem 'administrate', github: "excid3/administrate", branch: 'jumpstart'
   gem 'annotate', '>= 2.7.0'
-  gem 'bootstrap', '~> 4.3', '>= 4.3.1'
+  gem 'bootstrap', '~> 4.5'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
   gem 'devise', '~> 4.7', '>= 4.7.0'
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
   gem 'devise_masquerade', '~> 1.2'
-  gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
-  gem 'friendly_id', '~> 5.2', '>= 5.2.5'
+  gem 'font-awesome-sass', '~> 5.13'
+  gem 'friendly_id', '~> 5.3'
   gem 'guard', '>= 2.2.2', require: false
   gem 'guard-livereload', require: false
   gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
-  gem 'mini_magick', '~> 4.9', '>= 4.9.2'
   gem 'name_of_person', '~> 1.1'
-  gem 'omniauth-facebook', '~> 5.0'
-  gem 'omniauth-github', '~> 1.3'
+  gem 'omniauth-facebook', '~> 6.0'
+  gem 'omniauth-github', '~> 1.4'
   gem 'omniauth-twitter', '~> 1.4'
   gem 'pg'
   gem 'sidekiq', '~> 6.0', '>= 6.0.3'
-  gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
+  gem 'sitemap_generator', '~> 6.1', '>= 6.1.2'
   gem 'whenever', require: false
   # Test Gems
   gem 'factory_bot_rails'
@@ -71,7 +70,10 @@ def add_gems
   # Rubocop
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem 'rubocop-rails', require: false\
+  # Image processing
+  gem 'mini_magick', '~> 4.10', '>= 4.10.1'
+  gem 'image_processing'
 end
 
 def set_application_name
@@ -305,17 +307,20 @@ after_bundle do
   add_sitemap
 
   # Migrate
-  rails_command 'db:create'
-  rails_command 'db:migrate'
+  rails_command "db:create"
+  rails_command "active_storage:install"
+  rails_command "db:migrate"
 
   # Migrations must be done before this
   add_administrate
   add_annotate
 
   # Commit everything to git
-  git :init
-  git add: '.'
-  git commit: %( -m 'Initial commit' )
+  unless ENV["SKIP_GIT"]
+    git :init
+    git add: "."
+    git commit: %Q{ -m 'Initial commit' }
+  end
 
   say
   say 'Jumpstart app successfully created!', :blue
